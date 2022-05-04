@@ -1,4 +1,4 @@
-# kino
+# KINO
 A movie review single page application built on NodeJS
 
 ## Getting Started
@@ -19,3 +19,11 @@ A movie review single page application built on NodeJS
  ```
  npm init
  ```
+ ```
+npm install body-parser chai chai-http dotenv express express-fileupload express-session mocha mysql nodemon
+ ```
+ 
+ ### Executing program
+  ```
+ npm run start  
+  ```
