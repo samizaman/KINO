@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous" />
+    <link rel="stylesheet" href="/styles.css">
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+
+    <script src="client.js"></script>
+
+    <link rel="icon" href="uploads/icon.ico" type="image/icon-type">
+
+    <title class="title">KINO</title>
+</head>
+
+<body>
+    <!-- Start Nav -->
+    <nav>
+        <h3><a onclick="load_home()">KINO</a></h3>
+        <ul id="navbar">
+            <li><a onclick="load_home()" id="nav-home">Home</a></li>
+            <li><a onclick="load_register()">Register</a></li>
+            <li><a onclick="load_login()">Login</a></li>
+        </ul>
+    </nav>
+    <!-- End Nav -->
+
+
+    <div class="header mt-3" id="headline">
+        <nav class="navbar navbar-light bg-dark">
+            <div class="container-fluid">
+                <h1 class="headline">WHAT'S ON</h1>
+                <form class="d-flex search-reposition">
+                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" id="search">
+                    <button class="btn btn-outline-danger" type="submit" onclick="display_search_results(event)">Search</button>
+
+                </form>
+            </div>
+        </nav>
+        <hr class="dashed">
+    </div>
+
+    <div class="search-results" >
+        <div class="row row-cols-1 row-cols-md-4 g-5 mx-5 mt-3" id="search-results">
+
+        </div>
+    </div>
+
+
+    <!-- </div> -->
+
+    <!-- Start Posts -->
+    <div class="movie-list block">
+        <div class="row row-cols-1 row-cols-md-4 g-5 mx-5 mt-3" id="movie">
+
+        </div>
+    </div>
+    <!-- End Posts -->
+
+    <!-- Start Register -->
+    <div class="register none">
+        <div class="container mt-4">
+            <div class="card text-white bg-dark resize mx-auto">
+                <div class="card-header">
+                    <h4>Register</h4>
+                </div>
+                <div class="card-body">
+                    <div>
+                        <div class="form-group">
+                            <label for="register-username">Username</label>
+                            <input type="text" class="form-control" id="register-username" name="register-username"
+                                required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="register-email">Email</label>
+                            <input type="email" class="form-control" id="register-email" name="register-email" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="register-password">Password</label>
+                            <input type="password" class="form-control" id="register-password" name="register-password"
+                                onkeyup="confirm_password_validated()" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="register-confirm-password">Confirm Password</label>
+                            <input type="password" class="form-control" id="register-confirm-password"
+                                name="register-confirm-password" onkeyup="confirm_password_validated()" required>
+                        </div>
+
+                        <div style="padding: 10px;"></div>
+                        <div class="alert alert-danger" role="alert" id="error" style="display: none;"></div>
+                        <div class="alert alert-success" role="alert" id="success" style="display: none;"></div>
+
+                        <button id="submit-registration" type="submit" class="btn btn-primary"
+                            onclick="register(event)">Register</button>
+
+                        <div class="mt-2">Already a Member? <a onclick="load_login()">Sign In</a>.</div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Register -->
+
+    <!-- Start Login -->
+    <div class="login none">
+        <div class="container mt-4">
+            <div class="card text-white bg-dark resize mx-auto">
+                <div class="card-header">
+                    <h4>Login</h4>
+                </div>
+                <div class="card-body">
+                    <div>
+                        <div class="form-group">
+                            <label for="login-username">Username</label>
+                            <input type="text" class="form-control" id="login-username" name="login-username" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="login-password">Password</label>
+                            <input type="password" class="form-control" id="login-password" name="login-password"
+                                required>
+                        </div>
+
+                        <div style="padding: 10px;"></div>
+
+                        <button class="btn btn-primary" onclick="login()">Login</button>
+
+                        <div class="mt-2">Don't have an Account? <a onclick="load_register()">Sign Up</a></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Login -->
+
+    <!-- Start View Movie -->
+    <div class="view-movie none" id="view-movie">
+
+    </div>
+    <!-- End View Movie -->
+
+    <!-- Start Add Movie -->
+    <div class="add-movie none">
+        <div class="add-headline mb-5 mt-2">
+            <h2 class="text-center">Add Movie</h2>
+            <hr class="dashed-general" style="margin-right: 53px;">
+        </div>
+        <div class="container bg-dark">
+            <form class="row g-3 text-white">
+                <div class="col-md-4">
+                    <label for="add-title" class="form-label">Title</label>
+                    <input type="text" class="form-control" id="add-title">
+                </div>
+                <div class="col-md-4">
+                    <label for="add-genre" class="form-label">Genre</label>
+                    <input type="text" class="form-control" id="add-genre">
+                </div>
+                <div class="col-md-4">
+                    <label for="add-duration" class="form-label">Duration</label>
+                    <input type="number" class="form-control" id="add-duration">
+                </div>
+                <div class="col-12">
+                    <label for="add-description">Description</label>
+                    <textarea class="form-control" id="add-description"></textarea>
+                </div>
+                <div class="col-12">
+                    <label for="add-starring">Starring</label>
+                    <textarea class="form-control" id="add-starring"></textarea>
+                </div>
+                <div class="col-md-6">
+                    <label for="add-url" class="form-label">YouTube URL</label>
+                    <input type="text" class="form-control" id="add-url" placeholder="https://www.youtube.com/embed/">
+                </div>
+                <div class="col-md-2">
+                    <label for="add-release-date" class="form-label">Release Date</label>
+                    <input type="text" class="form-control" id="add-release-date" placeholder="MM.DD.YYYY">
+                </div>
+                <div class="col-md-2">
+                    <label for="add-language" class="form-label">Language</label>
+                    <input type="text" class="form-control" id="add-language">
+                </div>
+                <div class="col-md-2">
+                    <label for="add-subtitle" class="form-label">Subtitle(s)</label>
+                    <input type="text" class="form-control" id="add-subtitle">
+                </div>
+                <label>Poster</label>
+                <div class="input-group mb-3">
+                    <input type="file" class="form-control" id="add-poster">
+                    <label class="input-group-text" for="add-poster">Upload</label>
+                </div>
+                <div class="col-12">
+                    <button id="submit-movie" class="btn btn-primary" onclick="add_movie(event)">Add</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <!-- End Add Movie -->
+
+    <!-- Start Update Movie -->
+    <div class="update-movie none">
+
+    </div>
+    <!-- End Update Movie -->
+
+    <!-- Start User Profile Update -->
+    <div class="my-profile">
+
+    </div>
+    <!-- End User Profile Update -->
+
+    <!-- Start Footer -->
+    <footer class="footer mt-5">
+        <div class="container-fluid text-center text-md-left py-3">
+            <p class="text-center text-light">
+                © 2022 KINO Cinemas. All rights protected. | Designed by Sami
+            </p>
+        </div>
+    </footer>
+    <!-- End Footer -->
+
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
+    </script>
+</body>
+
+</html>
