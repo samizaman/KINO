@@ -1,5 +1,5 @@
 # KINO
-A movie review single page application built on NodeJS
+A single page application built on NodeJS to post movie reviews.
 
 ## Getting Started
 
